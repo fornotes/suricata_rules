@@ -1,0 +1,95 @@
+alert tcp any any -> any 445 (msg:"Bind to MS-SCMR"; flow:established,to_server; dcerpc.iface:367ABB81-9844-35F1-AD32-98F038001003; flowbits:set,ms-scmr; flowbits:noalert; classtype:policy-violation; sid:1000010; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SCMR::ROpenSCManager Called";flow:established,to_server;flowbits:isset,ms-scmr; dcerpc.opnum:15,27,64; classtype:policy-violation; sid:1000011; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SCMR::RCreateService Called";flow:established,to_server;flowbits:isset,ms-scmr; dcerpc.opnum:12,24; classtype:policy-violation; sid:1000012; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SCMR::RCreateServiceWOW64 Called";flow:established,to_server;flowbits:isset,ms-scmr; dcerpc.opnum:44,45; classtype:policy-violation; sid:1000013; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SCMR::RCreateWowService Called";flow:established,to_server;flowbits:isset,ms-scmr; dcerpc.opnum:60; classtype:policy-violation; sid:1000014; rev:1;)
+
+alert tcp any any -> any 445 (msg:"Bind to MS-RRP"; flow:established,to_server; dcerpc.iface:338CD001-2244-31F1-AAAA-900038001003; flowbits:set,ms-rrp; flowbits:noalert; classtype:policy-violation; sid:1000015; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-RRP::BaseRegSaveKey(Ex) Called"; flow:established,to_server; flowbits:isset,ms-rrp; dcerpc.opnum:20,31; classtype:policy-violation; sid:1000016; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-RRP::BaseRegCreateKey Called";flow:established,to_server;flowbits:isset,ms-rrp; dcerpc.opnum:6; classtype:policy-violation; sid:1000017; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-RRP::BaseRegQueryInfoKey Called";flow:established,to_server;flowbits:isset,ms-rrp; dcerpc.opnum:16; classtype:policy-violation; sid:1000018; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-RRP::BaseRegSetValue Called";flow:established,to_server;flowbits:isset,ms-rrp; dcerpc.opnum:22; classtype:policy-violation; sid:1000019; rev:1;)
+
+alert tcp any any -> any any (msg:"Bind to MS-TSCH"; flow:established,to_server; dcerpc.iface:86D35949-83C9-4044-B424-DB363231FD0C; flowbits:set,ms-tsch; flowbits:noalert; classtype:policy-violation; sid:1000020; rev:1;)
+alert tcp any any -> any any (msg:"MS-TSCH::SchRpcRegisterTask Called"; flow:established,to_server; flowbits:isset,ms-tsch; dcerpc.opnum:1; classtype:policy-violation; sid:1000021; rev:1;)
+alert tcp any any -> any any (msg:"MS-TSCH::SchRpcEnumTasks Called"; flow:established,to_server; flowbits:isset,ms-tsch; dcerpc.opnum:7; classtype:policy-violation; sid:1000022; rev:1;)
+
+alert tcp any any -> any 445 (msg:"Bind to MS-WKST"; flow:established,to_server; dcerpc.iface:6BFFD098-A112-3610-9833-46C3F87E345A; flowbits:set,ms-wkst; flowbits:noalert; classtype:policy-violation; sid:1000023; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-WKST::NetrWkstaGetInfo Called"; flow:established,to_server; flowbits:isset,ms-wkst; dcerpc.opnum:0; classtype:policy-violation; sid:1000024; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-WKST::NetrWkstaUserEnum Called"; flow:established,to_server; flowbits:isset,ms-wkst; dcerpc.opnum:2; classtype:policy-violation; sid:1000025; rev:1;)
+
+alert tcp any any -> any 445 (msg:"Bind to MS-SRVS"; flow:established,to_server; dcerpc.iface:4b324fc8-1670-01d3-1278-5a47bf6ee188; flowbits:set,ms-srvs; flowbits:noalert; classtype:policy-violation; sid:1000026; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SRVS::NetrSessionEnum Called";flow:established,to_server;flowbits:isset,ms-srvs; dcerpc.opnum:12; classtype:policy-violation; sid:1000027; rev:1;)
+
+alert tcp any any -> any 445 (msg:"Bind to MS-RPRN"; flow:established,to_server; dcerpc.iface:12345678-1234-ABCD-EF00-0123456789AB; flowbits:set,ms-rprn; flowbits:noalert; classtype:policy-violation; sid:1000028; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-RPRN::RpcAddPrinterDriverEx Called";flow:established,to_server;flowbits:isset,ms-rprn; dcerpc.opnum:89; classtype:policy-violation; sid:1000029; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-RPRN::RpcRemoteFindFirstPrinterChangeNotification(Ex) Called";flow:established,to_server;flowbits:isset,ms-rprn; dcerpc.opnum:62,65; classtype:policy-violation; sid:1000030; rev:1;)
+
+alert tcp any any -> any any (msg:"Bind to MS-PAR"; flow:established,to_server; dcerpc.iface:76F03F96-CDFD-44FC-A22C-64950A001209; flowbits:set,ms-par; flowbits:noalert; classtype:policy-violation; sid:1000031; rev:1;)
+alert tcp any any -> any any (msg:"MS-PAR::RpcAsyncAddPrinterDriver Called"; flow:established,to_server; flowbits:isset,ms-par; dcerpc.opnum:39; classtype:policy-violation; sid:1000032; rev:1;)
+
+alert tcp any any -> any 445 (msg:"Bind to MS-SAMR"; flow:established,to_server; dcerpc.iface:12345778-1234-ABCD-EF00-0123456789AC; flowbits:set,ms-samr; flowbits:noalert; classtype:policy-violation; sid:1000033; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SAMR::SamrOpenDomain Called";flow:established,to_server;flowbits:isset,ms-samr; dcerpc.opnum:7; classtype:policy-violation; sid:1000034; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SAMR::SamrOpenGroup Called";flow:established,to_server;flowbits:isset,ms-samr; dcerpc.opnum:19; classtype:policy-violation; sid:1000035; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SAMR::SamrLookupNamesInDomain Called";flow:established,to_server;flowbits:isset,ms-samr; dcerpc.opnum:17; classtype:policy-violation; sid:1000036; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SAMR::SamrQueryInformationGroup Called";flow:established,to_server;flowbits:isset,ms-samr; dcerpc.opnum:20; classtype:policy-violation; sid:1000037; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SAMR::SamrEnumerateDomainsInSamServer Called";flow:established,to_server;flowbits:isset,ms-samr; dcerpc.opnum:6; classtype:policy-violation; sid:1000038; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SAMR::SamrEnumerateGroupsInDomain Called";flow:established,to_server;flowbits:isset,ms-samr; dcerpc.opnum:11; classtype:policy-violation; sid:1000039; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SAMR::SamrEnumerateAliasesInDomain Called";flow:established,to_server;flowbits:isset,ms-samr; dcerpc.opnum:15; classtype:policy-violation; sid:1000040; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-SAMR::SamrEnumerateUsersInDomain Called";flow:established,to_server;flowbits:isset,ms-samr; dcerpc.opnum:13; classtype:policy-violation; sid:1000041; rev:1;)
+
+alert tcp any any -> any 445 (msg:"Bind to MS-LSAD/MS-LSAT"; flow:established,to_server; dcerpc.iface:12345778-1234-ABCD-EF00-0123456789AB; flowbits:set,ms-lsad_ms-lsat; flowbits:noalert; classtype:policy-violation; sid:1000042; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD/MS-LSAT::LsarOpenPolicy* Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:6,44,130; classtype:policy-violation; sid:1000043; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD/MS-LSAT::LsarLookupSid* Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:15,57,76; classtype:policy-violation; sid:1000044; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD::LsarQueryInformationPolicy Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:7; classtype:policy-violation; sid:1000045; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD::LsarSetInformationPolicy Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:8; classtype:policy-violation; sid:1000046; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD::LsarEnumerateTrustedDomains Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:13; classtype:policy-violation; sid:1000047; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD::LsarEnumeratePrivileges Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:2; classtype:policy-violation; sid:1000048; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD::LsarEnumeratePrivilegesAccount Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:18; classtype:policy-violation; sid:1000049; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD::LsarEnumerateAccounts Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:11; classtype:policy-violation; sid:1000050; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD::LsarEnumerateAccountRights Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:36; classtype:policy-violation; sid:1000051; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD::LsarEnumerateAccountsWithUserRight Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:35; classtype:policy-violation; sid:1000052; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-LSAD::LsarQueryDomainInformationPolicy Called";flow:established,to_server;flowbits:isset,ms-lsad_ms-lsat; dcerpc.opnum:53; classtype:policy-violation; sid:1000053; rev:1;)
+
+alert tcp any any -> any 445 (msg:"Bind to MS-EFSR"; flow:established,to_server; dcerpc.iface:c681d488-d850-11d0-8c52-00c04fd90f7e; flowbits:set,ms-efsr; flowbits:noalert; classtype:policy-violation; sid:1000054; rev:1;)
+alert tcp any any -> any 445 (msg:"Bind to MS-EFSR"; flow:established,to_server; dcerpc.iface:df1941c5-fe89-4e79-bf10-463657acf44d; flowbits:set,ms-efsr; flowbits:noalert; classtype:policy-violation; sid:1000055; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-EFSR::EfsRpcOpenFileRaw Called";flow:established,to_server;flowbits:isset,ms-efsr; dcerpc.opnum:0; classtype:policy-violation; sid:1000056; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-EFSR::EfsRpcEncryptFileSrv Called";flow:established,to_server;flowbits:isset,ms-efsr; dcerpc.opnum:4; classtype:policy-violation; sid:1000070; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-EFSR::EfsRpcDecryptFileSrv Called";flow:established,to_server;flowbits:isset,ms-efsr; dcerpc.opnum:5; classtype:policy-violation; sid:1000057; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-EFSR::EfsRpcQueryUsersOnFile Called";flow:established,to_server;flowbits:isset,ms-efsr; dcerpc.opnum:6; classtype:policy-violation; sid:1000058; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-EFSR::EfsRpcQueryRecoveryAgents Called";flow:established,to_server;flowbits:isset,ms-efsr; dcerpc.opnum:7; classtype:policy-violation; sid:1000059; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-EFSR::EfsRpcRemoveUsersFromFile Called";flow:established,to_server;flowbits:isset,ms-efsr; dcerpc.opnum:8; classtype:policy-violation; sid:1000060; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-EFSR::EfsRpcAddUsersToFile Called";flow:established,to_server;flowbits:isset,ms-efsr; dcerpc.opnum:9; classtype:policy-violation; sid:1000061; rev:1;)
+
+alert tcp any any -> any 445 (msg:"Bind to MS-NRPC"; flow:established,to_server; dcerpc.iface:12345678-1234-ABCD-EF00-01234567CFFB; flowbits:set,ms-nrpc; flowbits:noalert; classtype:policy-violation; sid:1000062; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-NRPC::NetrServerAuthenticate* Called";flow:established,to_server;flowbits:isset,ms-nrpc; dcerpc.opnum:5,15,26; classtype:policy-violation; sid:1000063; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-NRPC::NetrServerPasswordSet2* Called";flow:established,to_server;flowbits:isset,ms-nrpc; dcerpc.opnum:6,30; classtype:policy-violation; sid:1000064; rev:1;)
+
+alert tcp any any -> any 445 (msg:"Bind to MS-FSRVP"; flow:established,to_server; dcerpc.iface:a8e0653c-2744-4389-a61d-7373df8b2292; flowbits:set,ms-fsrvp; flowbits:noalert; classtype:policy-violation; sid:1000065; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-FSRVP::IsPathSupported Called";flow:established,to_server;flowbits:isset,ms-fsrvp; dcerpc.opnum:8; classtype:policy-violation; sid:1000066; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-FSRVP::IsPathShadowCopied Called";flow:established,to_server;flowbits:isset,ms-fsrvp; dcerpc.opnum:9; classtype:policy-violation; sid:1000067; rev:1;)
+
+alert tcp any any -> any 445 (msg:"Bind to MS-DFSNM"; flow:established,to_server; dcerpc.iface:4FC742E0-4A10-11CF-8273-00AA004AE673; flowbits:set,ms-dfsnm; flowbits:noalert; classtype:policy-violation; sid:1000068; rev:1;)
+alert tcp any any -> any 445 (msg:"MS-DFSNM::NetrDfsRemoveStdRoot Called";flow:established,to_server;flowbits:isset,ms-dfsnm; dcerpc.opnum:13; classtype:policy-violation; sid:1000069; rev:1;)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
