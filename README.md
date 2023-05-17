@@ -1,2 +1,2 @@
-# suricata_rules
+# suricata rules
 Useful Suricata Rules
